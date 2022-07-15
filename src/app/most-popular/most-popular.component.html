@@ -1,0 +1,6 @@
+<div class="most-popular">
+  <span class="label">Most Popular:</span>
+  <span *ngFor="let popularLineOfBusiness of popularLinesOfBusiness$ | async" class="item">
+    {{ popularLineOfBusiness.name }} ({{ popularLineOfBusiness.quoteCount }})
+  </span>
+</div>

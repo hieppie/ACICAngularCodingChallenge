@@ -1,0 +1,14 @@
+.most-popular {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.label {
+  font-weight: bold;
+}
+.item {
+  margin: 0 10px;
+}

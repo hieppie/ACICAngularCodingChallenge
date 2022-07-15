@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { LineOfBusiness } from './LineOfBusiness';
+import { LineOfBusiness, Quote } from './LineOfBusiness';
 import { MessageService } from './message.service';
 
 
@@ -12,6 +12,7 @@ import { MessageService } from './message.service';
 export class LineOfBusinessService {
 
   private lineOfBusinessUrl = 'api/linesOfBusiness';  // URL to web api
+  private recentQuotesUrl = 'api/recentQuotes';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -65,6 +66,16 @@ export class LineOfBusinessService {
          this.log(`no lines of business matching "${term}"`)),
       catchError(this.handleError<LineOfBusiness[]>('searchLinesOfBusiness', []))
     );
+  }
+
+
+  /** GET recent quotes from the server */
+  getRecentQuotes(): Observable<Quote[]> {
+    return this.http.get<Quote[]>(this.recentQuotesUrl)
+      .pipe(
+        tap(_ => this.log('fetched lines of business')),
+        catchError(this.handleError<Quote[]>('getLinesOfBusiness', []))
+      );
   }
 
   //////// Save methods //////////
